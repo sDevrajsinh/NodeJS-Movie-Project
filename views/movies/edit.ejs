@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Edit Movie - Movie Management System">
+    <title>
+        <%= title %> | Movie Manager
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <%- include('../partials/navbar') %>
+
+        <main class="main-content">
+            <div class="hero-section hero-small">
+                <div class="container">
+                    <h1 class="page-title">
+                        <span class="title-gradient">Edit Movie</span>
+                    </h1>
+                    <p class="page-subtitle">Update the movie details</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="form-container">
+                    <% if (typeof error !=='undefined' ) { %>
+                        <div class="alert alert-error">
+                            <span class="alert-icon">⚠️</span>
+                            <span>
+                                <%= error %>
+                            </span>
+                        </div>
+                        <% } %>
+
+                            <form action="/movies/<%= movie._id %>?_method=PUT" method="POST"
+                                enctype="multipart/form-data" class="movie-form">
+                                <div class="form-grid">
+                                    <div class="form-group full-width">
+                                        <label for="title" class="form-label">
+                                            Movie Title <span class="required">*</span>
+                                        </label>
+                                        <input type="text" id="title" name="title" class="form-input" required
+                                            maxlength="100" value="<%= movie.title %>">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="year" class="form-label">
+                                            Release Year <span class="required">*</span>
+                                        </label>
+                                        <input type="number" id="year" name="year" class="form-input" required
+                                            min="1888" max="<%= new Date().getFullYear() + 5 %>"
+                                            value="<%= movie.year %>">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="genre" class="form-label">
+                                            Genre <span class="required">*</span>
+                                        </label>
+                                        <select id="genre" name="genre" class="form-input" required>
+                                            <option value="Action" <%=movie.genre==='Action' ? 'selected' : '' %>>Action
+                                            </option>
+                                            <option value="Comedy" <%=movie.genre==='Comedy' ? 'selected' : '' %>>Comedy
+                                            </option>
+                                            <option value="Drama" <%=movie.genre==='Drama' ? 'selected' : '' %>>Drama
+                                            </option>
+                                            <option value="Horror" <%=movie.genre==='Horror' ? 'selected' : '' %>>Horror
+                                            </option>
+                                            <option value="Sci-Fi" <%=movie.genre==='Sci-Fi' ? 'selected' : '' %>>Sci-Fi
+                                            </option>
+                                            <option value="Romance" <%=movie.genre==='Romance' ? 'selected' : '' %>
+                                                >Romance</option>
+                                            <option value="Thriller" <%=movie.genre==='Thriller' ? 'selected' : '' %>
+                                                >Thriller</option>
+                                            <option value="Documentary" <%=movie.genre==='Documentary' ? 'selected' : ''
+                                                %>>Documentary</option>
+                                            <option value="Animation" <%=movie.genre==='Animation' ? 'selected' : '' %>
+                                                >Animation</option>
+                                            <option value="Other" <%=movie.genre==='Other' ? 'selected' : '' %>>Other
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="rating" class="form-label">
+                                            Rating (0-10)
+                                        </label>
+                                        <input type="number" id="rating" name="rating" class="form-input" min="0"
+                                            max="10" step="0.1" value="<%= movie.rating %>">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="director" class="form-label">
+                                            Director
+                                        </label>
+                                        <input type="text" id="director" name="director" class="form-input"
+                                            value="<%= movie.director || '' %>">
+                                    </div>
+
+                                    <div class="form-group full-width">
+                                        <label for="description" class="form-label">
+                                            Description <span class="required">*</span>
+                                        </label>
+                                        <textarea id="description" name="description" class="form-textarea" required
+                                            maxlength="1000" rows="5"><%= movie.description %></textarea>
+                                        <span class="char-count">
+                                            <%= movie.description.length %> / 1000
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group full-width">
+                                        <label class="form-label">Current Poster</label>
+                                        <div class="current-poster">
+                                            <img src="<%= movie.poster %>" alt="<%= movie.title %>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group full-width">
+                                        <label for="poster" class="form-label">
+                                            Update Poster (Optional)
+                                        </label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="poster" name="poster" class="file-input"
+                                                accept="image/*">
+                                            <label for="poster" class="file-label">
+                                                <span class="file-icon">📁</span>
+                                                <span class="file-text">Choose new poster image</span>
+                                                <span class="file-hint">Max 5MB (JPG, PNG, GIF, WebP)</span>
+                                            </label>
+                                            <div class="image-preview" id="imagePreview"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <a href="/movies/<%= movie._id %>" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <span class="btn-icon">💾</span>
+                                        Update Movie
+                                    </button>
+                                </div>
+                            </form>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>
+            <script src="/js/main.js"></script>
+</body>
+
+</html>

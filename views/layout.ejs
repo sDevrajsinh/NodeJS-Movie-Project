@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Movie Management System - Manage your movie collection">
+    <title><%= title %> | Movie Manager</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/movies" class="logo">
+                    <span class="logo-icon">🎬</span>
+                    <span class="logo-text">MovieHub</span>
+                </a>
+                <div class="nav-links">
+                    <a href="/movies" class="nav-link <%= title.includes('Movie Collection') ? 'active' : '' %>">
+                        <span class="nav-icon">🎞️</span>
+                        All Movies
+                    </a>
+                    <a href="/movies/new" class="nav-link <%= title.includes('Add') ? 'active' : '' %>">
+                        <span class="nav-icon">➕</span>
+                        Add Movie
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <%- body %>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 MovieHub. Built with Node.js, Express & MongoDB</p>
+                <div class="footer-links">
+                    <span class="tech-badge">Node.js</span>
+                    <span class="tech-badge">Express</span>
+                    <span class="tech-badge">MongoDB</span>
+                    <span class="tech-badge">MVC</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

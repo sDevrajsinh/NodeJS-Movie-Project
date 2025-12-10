@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Error - Movie Management System">
+    <title>Error | Movie Manager</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+
+        <main class="main-content">
+            <div class="error-page">
+                <div class="container">
+                    <div class="error-content">
+                        <div class="error-icon">⚠️</div>
+                        <h1 class="error-title">Oops! Something went wrong</h1>
+                        <p class="error-message">
+                            <%= message %>
+                        </p>
+                        <% if (typeof error !=='undefined' && error.stack && process.env.NODE_ENV==='development' ) { %>
+                            <div class="error-stack">
+                                <h3>Stack Trace (Development Mode):</h3>
+                                <pre><%= error.stack %></pre>
+                            </div>
+                            <% } %>
+                                <a href="/movies" class="btn btn-primary">
+                                    <span class="btn-icon">🏠</span>
+                                    Back to Home
+                                </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('partials/footer') %>
+            <script src="/js/main.js"></script>
+</body>
+
+</html>

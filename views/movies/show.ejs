@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%= movie.title %> - Movie Details">
+    <title>
+        <%= title %> | Movie Manager
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <%- include('../partials/navbar') %>
+
+        <main class="main-content">
+            <div class="movie-detail-hero"
+                style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('<%= movie.poster %>');">
+                <div class="container">
+                    <div class="detail-content">
+                        <div class="detail-poster">
+                            <img src="<%= movie.poster %>" alt="<%= movie.title %>">
+                        </div>
+                        <div class="detail-info">
+                            <h1 class="detail-title">
+                                <%= movie.title %>
+                            </h1>
+                            <div class="detail-meta">
+                                <span class="meta-item">📅 <%= movie.year %></span>
+                                <span class="meta-item genre-badge">
+                                    <%= movie.genre %>
+                                </span>
+                                <% if (movie.rating> 0) { %>
+                                    <span class="meta-item rating-badge">⭐ <%= movie.rating.toFixed(1) %>/10</span>
+                                    <% } %>
+                            </div>
+                            <% if (movie.director) { %>
+                                <p class="detail-director">
+                                    <strong>Director:</strong>
+                                    <%= movie.director %>
+                                </p>
+                                <% } %>
+                                    <p class="detail-description">
+                                        <%= movie.description %>
+                                    </p>
+
+                                    <div class="detail-actions">
+                                        <a href="/movies/<%= movie._id %>/edit" class="btn btn-primary">
+                                            <span class="btn-icon">✏️</span>
+                                            Edit Movie
+                                        </a>
+                                        <form action="/movies/<%= movie._id %>?_method=DELETE" method="POST"
+                                            style="display: inline;"
+                                            onsubmit="return confirm('Are you sure you want to delete this movie?')">
+                                            <button type="submit" class="btn btn-danger">
+                                                <span class="btn-icon">🗑️</span>
+                                                Delete
+                                            </button>
+                                        </form>
+                                        <a href="/movies" class="btn btn-secondary">
+                                            <span class="btn-icon">←</span>
+                                            Back to List
+                                        </a>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="additional-info">
+                    <div class="info-card">
+                        <h3>Movie Information</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Added on:</span>
+                                <span class="info-value">
+                                    <%= new Date(movie.createdAt).toLocaleDateString('en-US', { year: 'numeric' ,
+                                        month: 'long' , day: 'numeric' }) %>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Last updated:</span>
+                                <span class="info-value">
+                                    <%= new Date(movie.updatedAt).toLocaleDateString('en-US', { year: 'numeric' ,
+                                        month: 'long' , day: 'numeric' }) %>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Movie ID:</span>
+                                <span class="info-value">
+                                    <%= movie._id %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>
+            <script src="/js/main.js"></script>
+</body>
+
+</html>
