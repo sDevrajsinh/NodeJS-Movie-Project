@@ -234,6 +234,30 @@ This project comprehensively demonstrates all major Node.js concepts:
 | `MONGODB_URI` | MongoDB connection string | mongodb://localhost:27017/movieDB |
 | `NODE_ENV` | Environment mode | development |
 
+## 🌐 Deployment
+
+Ready to deploy your Movie Management System? Check out the comprehensive [DEPLOYMENT.md](./DEPLOYMENT.md) guide for detailed instructions on deploying to:
+
+- **Render** (Recommended - Free tier available)
+- **Railway** (Free $5 credit monthly)
+- **Heroku** (Paid plans)
+- **Vercel** (Serverless)
+- **DigitalOcean** (Free $200 credit)
+
+### Quick Deploy to Render
+
+1. Create a [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) free cluster
+2. Sign up at [Render](https://render.com)
+3. Connect your GitHub repository
+4. Add environment variables:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string
+   - `PORT`: 3000
+   - `NODE_ENV`: production
+5. Deploy! 🚀
+
+For detailed step-by-step instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)
+
+
 ## 🤝 Contributing
 
 This is a learning project demonstrating Node.js concepts. Feel free to:
